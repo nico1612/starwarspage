@@ -34,14 +34,6 @@ export const Personajes=()=>{
         setReload(true)
     }
 
-    const obtenerId=({id})=>{
-        if(id<17){
-            return 
-        }
-        else{
-            return 
-        }
-    }
     return(
         <div>
             <ul>

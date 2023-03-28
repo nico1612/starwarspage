@@ -6,10 +6,36 @@ import { obtenerListaDePersonajes } from "../hooks/obtenerListaDePersonajes"
 
 
 export const StarShips=()=>{
-    const path= "starships"
-    const {resultados}=obtenerListaDePersonajes(path)
-    const starships=resultados
-    console.log(starships)
+    
+    const [page,setPage]=useState(1)
+    const[starships,setStarShip]=useState([])
+    const [reload,setReload]=useState([false])
+
+    useEffect(()=>{
+        const cargarUsuarios=async()=>{
+            setStarShip([])
+            const results=await axios(`https://swapi.dev/api/starships/?page=${page}`)
+            setStarShip(results.data.results)
+        }
+        cargarUsuarios()
+        setReload(false)
+    },[reload])
+
+    const onPrevios=()=>{
+        if(page===1)return;
+
+        setPage(page-1)
+        setReload(true)
+    }
+
+    
+    const onNext=()=>{
+        if(page===9)return;
+
+        setPage(page+1)
+        setReload(true)
+    }
+
     return(
         <div>
             <ul>
@@ -17,6 +43,9 @@ export const StarShips=()=>{
                     <Item key={id} name={starShip.name} path={"starship"} id={id} />
                 ))}
             </ul>
+
+            <button onClick={onPrevios}>previos</button>
+            <button onClick={onNext}>next</button>
         </div>
     )
 }
