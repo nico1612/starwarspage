@@ -30,7 +30,7 @@ export const StarShips=()=>{
 
     
     const onNext=()=>{
-        if(page===9)return;
+        if(page===4)return;
 
         setPage(page+1)
         setReload(true)
