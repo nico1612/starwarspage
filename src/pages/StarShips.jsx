@@ -1,13 +1,15 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import { Item } from "../components/Item"
-import { obtenerListaDePersonajes } from "../hooks/obtenerListaDePersonajes"
+import { useNavigate, useParams } from "react-router-dom"
+import { StarShipCard } from "../components/StarShipCard"
 
 
 export const StarShips=()=>{
     
-    const [page,setPage]=useState(1)
+    const {pages} = useParams()
+    const navigate= useNavigate()
+    const [page,setPage]=useState(parseInt(pages,10))
+
     const[starships,setStarShip]=useState([])
     const [reload,setReload]=useState([false])
 
@@ -40,7 +42,7 @@ export const StarShips=()=>{
         <div>
             <ul>
                 {starships.map((starShip,id) =>(
-                    <Item key={id} name={starShip.name} path={"starship"} id={id} />
+                    <StarShipCard key={id} starship={starShip} id={id+10*(page-1)} />
                 ))}
             </ul>
 

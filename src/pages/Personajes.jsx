@@ -1,11 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Item } from "../components/Item"
+import { useNavigate, useParams } from "react-router-dom"
+import { PersonajeCard } from "../components/PersonajeCard"
 
 
 export const Personajes=()=>{
 
-    const [page,setPage]=useState(1)
+    const {pages} = useParams()
+    const navigate= useNavigate()
+    const [page,setPage]=useState(parseInt(pages,10))
     const[people,setPeople]=useState([])
     const [reload,setReload]=useState([false])
 
@@ -32,16 +35,21 @@ export const Personajes=()=>{
 
         setPage(page+1)
         setReload(true)
+        
     }
 
     return(
+
         <div>
-            <ul>
+           <ul>
                 {people.map((Personaje,id) =>(
-                    <Item key={id} name={Personaje.name} path={"people"} id={id+10*(page-1)} />
+                    <div className="bg-warning">
+                        <PersonajeCard key={id} personaje={Personaje} page={page} id={id+10*(page-1)}/>
+                    </div>
                 ))}
 
             </ul>
+
             <button onClick={onPrevios}>previos</button>
             <button onClick={onNext}>next</button>
         </div>

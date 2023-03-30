@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 
 export const Personaje=()=>{
-    const {id}= useParams();
+    const navigate=useNavigate()
+    const {id,page}= useParams();
     let ids=parseInt(id,10)
     if(ids>=17){
         ids=ids+2
@@ -24,31 +25,36 @@ export const Personaje=()=>{
     },[])
 
     const onReturn=()=>{
-        Navigate(-1)
+        navigate(`/personajes/${page}`)
     }
 
     if(!personaje){
         return <Navigate to="/personajes" />
     }
     return(
-        <div className="row mt-5">
-                
-                <div className="col-8">
-                    <h3>{personaje.name}</h3>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item"><b>altura:</b> {personaje.height}</li>
-                        <li className="list-group-item"><b>peso:</b> {personaje.mass}</li>
-                        <li className="list-group-item"><b>color de pelo:</b> {personaje.hair_color}</li>
-                    </ul>
+        <div className="col animate__animated animate__fadeIn">
+            <div className="card bg-dark">
+                <div className="row no-gutter">
+                    <div className="col-12 bg-warning">
+                        <div className="card-body">
+                            <h3>{personaje.name}</h3>
+                            <ul className="list-group list-group-flush bg-dark">
+                                <li className="list-group-item bg-warning"><b>altura:</b> {personaje.height}</li>
+                                <li className="list-group-item bg-warning"><b>peso:</b> {personaje.mass}</li>
+                                <li className="list-group-item bg-warning"><b>color de pelo:</b> {personaje.hair_color}</li>
+                            </ul>
                     
 
-                    <button 
-                        className="btn btn-outline-primary"
-                        onClick={onReturn}
-                    >
-                        back
-                    </button>
+                            <button 
+                                className="btn btn-outline-primary"
+                                onClick={onReturn}
+                            >
+                                back
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
     )
 }

@@ -4,8 +4,9 @@ import Star_Wars_Logo from "../imagenes/Star_Wars_Logo.svg"
 
 export const Navbar2 =()=>{
 
+    
     return(
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary navbar bg-dark" data-bs-theme="dark">
             <div className="container-fluid">
                 <Link 
                     className="navbar-brand" 
@@ -23,7 +24,7 @@ export const Navbar2 =()=>{
                         <li className="nav-item">
                             <NavLink
                                 className={(isActive)=>`nav-item nav-link ${isActive ? 'active':''}`}
-                                to="/personajes"
+                                to="/personajes/1"
                             >
                                 personajes
                             </NavLink>
@@ -31,7 +32,7 @@ export const Navbar2 =()=>{
                         <li className="nav-item">
                             <NavLink 
                                 className={(isActive)=> `nav-item nav-link ${isActive?'active':''}`} 
-                                to="/starships"
+                                to="/starships/1"
                             >
                                 naves
                             </NavLink>
